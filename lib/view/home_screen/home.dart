@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:akpa/model/confgmodel/config_model.dart';
 import 'package:akpa/model/usermodel/user_model.dart';
 import 'package:akpa/service/api_service.dart';
@@ -41,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(),
         backgroundColor: Colors.white,
         body: FutureBuilder(
           future: Future.wait([config, userProfile]),
@@ -155,8 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       'View your dashboard &\ncheck your details',
                       'assets/dashboard.png',
                       Colors.blue.shade100,
-                      Color.fromARGB(255, 3, 111, 200),
-                      DashBoardScreen(),
+                      const Color.fromARGB(255, 3, 111, 200),
+                      const DashBoardScreen(),
                     ),
                     const SizedBox(height: 30),
                     buildCard(
@@ -165,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       'View your transaction & details',
                       'assets/transaction.png',
                       Colors.red.shade100,
-                      Color.fromARGB(255, 237, 111, 102),
-                      TransactionScreen(),
+                      const Color.fromARGB(255, 237, 111, 102),
+                      const TransactionScreen(),
                     ),
                     const SizedBox(height: 30),
                     buildCard(
@@ -176,17 +178,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       'assets/help.png',
                       Colors.teal.shade100,
                       Colors.green,
-                      HelpProvidedList(),
+                      const HelpProvidedList(),
                     ),
                     const SizedBox(height: 30),
                     buildCard(
                       context,
                       'Death list',
                       'View Death list',
-                      'assets/death.png',
-                      Colors.red,
-                      Colors.white,
-                      DeathListPage(),
+                      'assets/mambers.jpg',
+                      Colors.red.shade100,
+                      Colors.black87,
+                      const DeathListPage(),
                     ),
                   ],
                 ),

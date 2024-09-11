@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
-  // Method to show the Terms & Conditions dialog
   void _showTermsAndConditions(BuildContext context) {
     showDialog(
       context: context,
@@ -116,6 +115,14 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 const Text(
                   'Photographers Association',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'Swanthanam',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,

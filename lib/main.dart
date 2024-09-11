@@ -1,4 +1,3 @@
-import 'package:akpa/view/bottom_bar/bottom_bar.dart';
 import 'package:akpa/view/profile_screen/profile.dart';
 import 'package:akpa/view/welcome_screen.dart';
 import 'package:flutter/material.dart';

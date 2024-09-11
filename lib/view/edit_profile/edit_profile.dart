@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
+
 import 'dart:developer';
 import 'dart:io';
 import 'package:akpa/service/profile_service.dart';
@@ -5,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
@@ -35,18 +39,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to update profile picture')),
+            const SnackBar(content: Text('Failed to update profile picture')),
           );
         }
       } catch (e) {
         log('Error during profile upload: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error uploading profile picture')),
+          const SnackBar(content: Text('Error uploading profile picture')),
         );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please select an image first')),
+        const SnackBar(content: Text('Please select an image first')),
       );
     }
   }
@@ -55,44 +59,44 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Edit Profile Picture',
-          style: TextStyle(color: Colors.black), // Changed text color to black
+          style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: Colors.white, // Changed background to white
-        iconTheme: IconThemeData(color: Colors.black), // Back button color
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Container(
-        color: Colors.white, // Changed background color to white
+        color: Colors.white,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               image == null
-                  ? Text(
+                  ? const Text(
                       'No image selected.',
                       style: TextStyle(
-                        color: Colors.black, // Text color changed to black
+                        color: Colors.black,
                       ),
                     )
                   : Image.file(image!, height: 150),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: pickImage,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Button background color
-                  foregroundColor: Colors.white, // Button text color
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
                 ),
-                child: Text('Pick Image'),
+                child: const Text('Pick Image'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: uploadProfilePicture,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Button background color
-                  foregroundColor: Colors.white, // Button text color
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
                 ),
-                child: Text('Upload Image'),
+                child: const Text('Upload Image'),
               ),
             ],
           ),

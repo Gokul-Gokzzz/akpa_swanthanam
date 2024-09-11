@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:akpa/view/dashboard/dashboard.dart';
 import 'package:akpa/view/help_provided_list/help_provided_list.dart';
 import 'package:akpa/view/home_screen/home.dart';
@@ -15,7 +17,7 @@ class BottombarScreens extends StatefulWidget {
 }
 
 class __BottombarScreensState extends State<BottombarScreens> {
-  int _currentPageIndex = 0;
+  int currentPageIndex = 0;
 
   late final List<Widget> pages;
 
@@ -24,7 +26,7 @@ class __BottombarScreensState extends State<BottombarScreens> {
     super.initState();
 
     pages = [
-      HomeScreen(),
+      const HomeScreen(),
       const DashBoardScreen(),
       const TransactionScreen(),
       const HelpProvidedList(),
@@ -60,12 +62,12 @@ class __BottombarScreensState extends State<BottombarScreens> {
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.black,
-            currentIndex: _currentPageIndex,
+            currentIndex: currentPageIndex,
             selectedItemColor: Colors.white,
             unselectedItemColor: Colors.grey,
             onTap: (int index) {
               setState(() {
-                _currentPageIndex = index;
+                currentPageIndex = index;
               });
             },
             items: [
@@ -89,7 +91,7 @@ class __BottombarScreensState extends State<BottombarScreens> {
           ),
         ),
       ),
-      body: pages[_currentPageIndex],
+      body: pages[currentPageIndex],
     );
   }
 
@@ -104,14 +106,14 @@ class __BottombarScreensState extends State<BottombarScreens> {
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: _currentPageIndex == index
+            color: currentPageIndex == index
                 ? Colors.white.withOpacity(0.2)
                 : Colors.transparent,
           ),
           padding: const EdgeInsets.all(10),
           child: ImageIcon(
             AssetImage(imagePath),
-            color: _currentPageIndex == index ? Colors.white : Colors.grey,
+            color: currentPageIndex == index ? Colors.white : Colors.grey,
           ),
         ),
       ),

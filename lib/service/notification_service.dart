@@ -20,22 +20,22 @@ class NotificationService {
         ),
       );
 
-      print('API Response: ${response.data}');
+      log('API Response: ${response.data}');
 
       if (response.statusCode == 200) {
         if (response.data != null && response.data['data'] is List) {
           final data = response.data['data'] as List;
           return data.map((json) => NotificationModel.fromJson(json)).toList();
         } else {
-          print('Unexpected API response structure: ${response.data}');
+          log('Unexpected API response structure: ${response.data}');
           return [];
         }
       }
       return [];
     } catch (e) {
-      print('Error fetching notifications: $e');
+      log('Error fetching notifications: $e');
       if (e is DioException) {
-        print('Dio error: ${e.response?.data}');
+        log('Dio error: ${e.response?.data}');
       }
       return [];
     }
@@ -53,12 +53,11 @@ class NotificationService {
       if (response.statusCode == 200) {
         return true;
       } else {
-        print(
-            'Failed to mark notification as seen. Status code: ${response.statusCode}');
+        log('Failed to mark notification as seen. Status code: ${response.statusCode}');
         return false;
       }
     } catch (e) {
-      print('Error marking notification as seen: $e');
+      log('Error marking notification as seen: $e');
       return false;
     }
   }

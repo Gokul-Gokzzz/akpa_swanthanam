@@ -1,10 +1,16 @@
-import 'dart:developer';
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:flutter/material.dart';
 import 'package:akpa/model/confgmodel/config_model.dart';
 import 'package:akpa/model/deathmodel/death_model.dart';
 import 'package:akpa/service/api_service.dart';
-import 'package:flutter/material.dart';
+import 'package:akpa/view/death_details/death_detail.dart';
+import 'dart:developer';
+import 'package:intl/intl.dart';
 
 class DeathListPage extends StatefulWidget {
+  const DeathListPage({super.key});
+
   @override
   _DeathListPageState createState() => _DeathListPageState();
 }
@@ -20,14 +26,21 @@ class _DeathListPageState extends State<DeathListPage> {
     config = ApiService().fetchConfig();
   }
 
+  String formatDate(String date) {
+    DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+    DateFormat outputFormat = DateFormat('dd-MM-yyyy');
+    DateTime parsedDate = inputFormat.parse(date);
+    return outputFormat.format(parsedDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Set background to white
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Death List'),
-        backgroundColor: Colors.blue, // Set a suitable app bar color
-        foregroundColor: Colors.white, // App bar text color
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
       ),
       body: FutureBuilder<Config>(
         future: config,
@@ -90,15 +103,26 @@ class _DeathListPageState extends State<DeathListPage> {
                         title: Text(
                           detail.name,
                           style: const TextStyle(
-                            color: Colors.black, // Set text color to black
+                            color: Colors.black,
                           ),
                         ),
                         subtitle: Text(
-                          'Date of Death: ${detail.dateOfDeath}',
+                          'Date of Death: ${formatDate(detail.dateOfDeath)}',
                           style: const TextStyle(
-                            color: Colors.grey, // Set subtitle to grey
+                            color: Colors.grey,
                           ),
                         ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DeathDetailPage(
+                                deathDetail: detail,
+                                config: config,
+                              ),
+                            ),
+                          );
+                        },
                       );
                     },
                   );

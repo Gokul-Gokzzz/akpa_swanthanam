@@ -4,7 +4,7 @@ class InfoRow extends StatelessWidget {
   final String title;
   final String value;
 
-  InfoRow({required this.title, required this.value});
+  const InfoRow({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +12,11 @@ class InfoRow extends StatelessWidget {
       children: [
         Text(
           '$title : ',
-          style: TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14),
         ),
         Text(
           value,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ],
     );

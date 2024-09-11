@@ -4,7 +4,7 @@ class CustomBadge extends StatelessWidget {
   final Widget child;
   final int count;
 
-  CustomBadge({required this.child, required this.count});
+  const CustomBadge({super.key, required this.child, required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +17,19 @@ class CustomBadge extends StatelessWidget {
             right: 0,
             top: 0,
             child: Container(
-              padding: EdgeInsets.all(4),
+              padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(12),
               ),
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 minWidth: 20,
                 minHeight: 20,
               ),
               child: Center(
                 child: Text(
                   '$count',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ),
             ),

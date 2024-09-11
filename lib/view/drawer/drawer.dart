@@ -1,12 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:akpa/service/api_service.dart';
 import 'package:akpa/service/store_service.dart';
 import 'package:akpa/view/dashboard/dashboard.dart';
 import 'package:akpa/view/death_details/death_details.dart';
-import 'package:akpa/view/family_details/family_details.dart';
 import 'package:akpa/view/help_provided_list/help_provided_list.dart';
 import 'package:akpa/view/drawer/widget/drawer_widget.dart';
-import 'package:akpa/view/member_list/member_list.dart';
-import 'package:akpa/view/notification_screen/notifiaction.dart';
 import 'package:akpa/view/profile_screen/profile.dart';
 import 'package:akpa/view/transaction/transaction.dart';
 import 'package:akpa/view/welcome_screen.dart';
@@ -23,7 +22,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.white, // Change background to white
+      backgroundColor: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -33,8 +32,8 @@ class _MyDrawerState extends State<MyDrawer> {
               MyListTile(
                 imagePath: 'assets/user.png',
                 text: 'Profile',
-                textColor: Colors.black, // Set text color to black
-                iconColor: Colors.black, // Set icon color to black
+                textColor: Colors.black,
+                iconColor: Colors.black,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -93,7 +92,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DeathListPage(),
+                      builder: (context) => const DeathListPage(),
                     ),
                   );
                 },
@@ -105,8 +104,8 @@ class _MyDrawerState extends State<MyDrawer> {
             child: MyListTile(
               imagePath: 'assets/logout.png',
               text: 'L O G O U T',
-              textColor: Colors.red, // Set logout text color to red
-              iconColor: Colors.red, // Set logout icon color to red
+              textColor: Colors.red,
+              iconColor: Colors.red,
               onTap: () async {
                 await ApiService().logout();
                 await StoreService().clearValues();

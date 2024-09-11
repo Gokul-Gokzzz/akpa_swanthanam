@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:akpa/model/transactionmodel/transaction_model.dart';
 import 'package:akpa/service/api_service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'widget/transaction_card.dart';
 
 class TransactionScreen extends StatefulWidget {
@@ -23,7 +26,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white, // Updated background color
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -36,7 +39,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade200, // Light grey background
+                        color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: TextField(
@@ -64,12 +67,12 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              Text(
+              const Text(
                 'Transactions',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black, // Updated text color
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -78,16 +81,16 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   future: transactionList,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                           child:
                               CircularProgressIndicator(color: Colors.black));
                     } else if (snapshot.hasError) {
-                      print('Error in FutureBuilder: ${snapshot.error}');
-                      return Center(
+                      log('Error in FutureBuilder: ${snapshot.error}');
+                      return const Center(
                           child: Text('Failed to load transactions',
                               style: TextStyle(color: Colors.black)));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(
+                      return const Center(
                           child: Text('No transactions available',
                               style: TextStyle(color: Colors.black)));
                     } else {
@@ -96,7 +99,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         itemBuilder: (context, index) {
                           final transaction = snapshot.data![index];
                           return TransactionCard(
-                            date: transaction.date,
+                            date: formatDate(transaction.date),
                             amount: transaction.amount,
                             referenceNumber: transaction.referenceNumber,
                           );
@@ -111,5 +114,16 @@ class _TransactionScreenState extends State<TransactionScreen> {
         ),
       ),
     );
+  }
+
+  String formatDate(String dateString) {
+    try {
+      final DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+      final DateFormat outputFormat = DateFormat('dd/MM/yyyy');
+      final DateTime dateTime = inputFormat.parse(dateString);
+      return outputFormat.format(dateTime);
+    } catch (e) {
+      return dateString;
+    }
   }
 }

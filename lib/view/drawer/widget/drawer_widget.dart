@@ -5,8 +5,8 @@ class MyListTile extends StatelessWidget {
   final String text;
   final void Function()? onTap;
   final Widget? trailing;
-  final Color textColor; // Add textColor
-  final Color iconColor; // Add iconColor
+  final Color textColor;
+  final Color iconColor;
 
   const MyListTile({
     super.key,
@@ -14,8 +14,8 @@ class MyListTile extends StatelessWidget {
     required this.text,
     required this.onTap,
     this.trailing,
-    this.textColor = Colors.black, // Default text color
-    this.iconColor = Colors.black, // Default icon color
+    this.textColor = Colors.black,
+    this.iconColor = Colors.black,
   });
 
   @override
@@ -27,13 +27,13 @@ class MyListTile extends StatelessWidget {
           imagePath,
           width: 20,
           height: 20,
-          color: iconColor, // Apply icon color
+          color: iconColor,
         ),
         onTap: onTap,
         trailing: trailing,
         title: Text(
           text,
-          style: TextStyle(color: textColor), // Apply text color
+          style: TextStyle(color: textColor),
         ),
       ),
     );

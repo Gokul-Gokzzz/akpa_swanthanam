@@ -15,7 +15,7 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white, // Changed background color to white
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(left: 15, top: 15, right: 15),
           child: Column(
@@ -27,7 +27,7 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black, // Text color changed to black
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 20),
@@ -44,8 +44,7 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
                       return const Center(
                         child: Text(
                           'Failed to load help list',
-                          style: TextStyle(
-                              color: Colors.black), // Error text color black
+                          style: TextStyle(color: Colors.black),
                         ),
                       );
                     } else if (!snapshot.hasData ||
@@ -53,9 +52,7 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
                       return const Center(
                         child: Text(
                           'No help provided.',
-                          style: TextStyle(
-                              color:
-                                  Colors.black), // Empty list text color black
+                          style: TextStyle(color: Colors.black),
                         ),
                       );
                     } else {
@@ -66,7 +63,7 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
                         itemBuilder: (context, index) {
                           final help = helpList[index];
 
-                          final name = help.name ?? 'No Name Available';
+                          final name = help.name;
                           final image = help.image.isNotEmpty
                               ? help.image
                               : 'https://via.placeholder.com/150';
@@ -78,8 +75,7 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12.0, horizontal: 16.0),
                               decoration: BoxDecoration(
-                                color: Colors
-                                    .grey.shade300, // Light container color
+                                color: Colors.grey.shade300,
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: const [
                                   BoxShadow(
@@ -115,11 +111,10 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
                                             style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors
-                                                    .black), // Name text color black
+                                                color: Colors.black),
                                           ),
                                           Text(
-                                            help.districtName ?? 'Unknown',
+                                            help.districtName,
                                             style: const TextStyle(
                                                 color: Colors
                                                     .grey), // District name grey
@@ -129,13 +124,13 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
                                     ],
                                   ),
                                   const SizedBox(height: 8),
-                                  HelpInfo(
+                                  helpInfo(
                                       'Account Amount', help.accountAmount),
-                                  HelpInfo(
+                                  helpInfo(
                                       'Balance Amount', help.balanceAmount),
-                                  HelpInfo('Date of Death', help.dateOfDeath),
-                                  HelpInfo('Cheque Number', help.chequeNumber),
-                                  HelpInfo(
+                                  helpInfo('Date of Death', help.dateOfDeath),
+                                  helpInfo('Cheque Number', help.chequeNumber),
+                                  helpInfo(
                                       'Credited Amount', help.creditedAmount),
                                 ],
                               ),
@@ -154,7 +149,7 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
     );
   }
 
-  Widget HelpInfo(String? title, dynamic value) {
+  Widget helpInfo(String? title, dynamic value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -162,14 +157,13 @@ class _HelpProvidedListState extends State<HelpProvidedList> {
           Text(
             '$title: ',
             style: const TextStyle(
-              color: Colors.black87, // Info title color black
+              color: Colors.black87,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             value?.toString() ?? 'N/A',
-            style:
-                const TextStyle(color: Colors.black), // Info value color black
+            style: const TextStyle(color: Colors.black),
           ),
         ],
       ),

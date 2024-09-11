@@ -27,6 +27,7 @@ class DeathDetail {
   final int creditedStatus;
   final int status;
   final int deathStatus;
+  final String age;
 
   DeathDetail({
     required this.id,
@@ -57,6 +58,7 @@ class DeathDetail {
     required this.creditedStatus,
     required this.status,
     required this.deathStatus,
+    required this.age,
   });
 
   factory DeathDetail.fromJson(Map<String, dynamic> json) {
@@ -89,6 +91,7 @@ class DeathDetail {
       creditedStatus: json['credited_status'],
       status: json['status'],
       deathStatus: json['death_status'],
+      age: json['age'],
     );
   }
 }

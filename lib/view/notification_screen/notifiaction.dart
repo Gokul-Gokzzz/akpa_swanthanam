@@ -1,9 +1,15 @@
+// ignore_for_file: library_private_types_in_public_api
+
+import 'dart:developer';
+
 import 'package:akpa/model/notificationmodel/notification_model.dart';
 import 'package:akpa/service/notification_service.dart';
 import 'package:akpa/view/death_details/death_details.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
+
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }
@@ -15,10 +21,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   void initState() {
     super.initState();
-    _loadNotifications();
+    loadNotifications();
   }
 
-  Future<void> _loadNotifications() async {
+  Future<void> loadNotifications() async {
     final notifications =
         await NotificationService().fetchNotifications('1129');
 
@@ -44,13 +50,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
         });
       });
     } else {
-      print('Failed to mark notification as seen');
+      log('Failed to mark notification as seen');
     }
   }
 
   void _clearAllNotifications() async {
     await NotificationService().clearAllNotifications();
-    _loadNotifications();
+    loadNotifications();
   }
 
   @override
@@ -102,18 +108,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ],
       ),
-      backgroundColor: Colors.black, // Black background
+      backgroundColor: Colors.black,
       body: FutureBuilder<List<NotificationModel>>(
         future: _notifications,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-                child: CircularProgressIndicator(
-                    color: Colors.white)); // White spinner
+                child: CircularProgressIndicator(color: Colors.white));
           } else if (snapshot.hasError) {
             return Center(
                 child: Text('Error: ${snapshot.error}',
-                    style: TextStyle(color: Colors.white)));
+                    style: const TextStyle(color: Colors.white)));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(
                 child: Text('No notifications available.',
@@ -137,20 +142,20 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   notification.description,
                   style: TextStyle(
                     color: notification.isSeen == 1
-                        ? textColor.withOpacity(
-                            0.5) // Dimmed color for seen notifications
-                        : textColor, // Full color for unseen notifications
+                        ? textColor.withOpacity(0.5)
+                        : textColor,
                   ),
                 ),
                 onTap: () {
                   if (notification.isSeen == 0) {
                     _markAsSeen(notification.id.toString());
                   }
-                  // Navigate to Death Detail Page if the notification is related to a death
+
                   if (notification.type == "ERROR") {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DeathListPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const DeathListPage()),
                     );
                   }
                 },

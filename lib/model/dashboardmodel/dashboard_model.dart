@@ -1,5 +1,3 @@
-import 'package:akpa/model/usermodel/member_details.dart';
-
 class DashBoardModel {
   bool? status;
   String? message;

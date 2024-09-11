@@ -39,7 +39,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white, // Set the background color to white
+        backgroundColor: Colors.white,
         body: isLoading
             ? const Center(child: CircularProgressIndicator())
             : userProfile != null
@@ -75,8 +75,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                               BorderRadius.circular(20),
                                         ),
                                         child: const Icon(Icons.search,
-                                            color: Colors
-                                                .white), // Change icon color for contrast
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -90,7 +89,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           const Text(
                             'DashBoard',
                             style: TextStyle(
-                              color: Colors.black, // Change text color to black
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 30,
                             ),

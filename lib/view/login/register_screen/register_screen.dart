@@ -24,10 +24,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'https://lifelinekeralatrust.com/member/auth/register');
               if (await canLaunchUrl(url)) {
                 await launchUrl(url);
-                log('url is:${url}');
+                log('url is:$url');
               }
             },
-            child: Text('open Url')),
+            child: const Text('open Url')),
       ),
     );
   }

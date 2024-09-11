@@ -24,7 +24,7 @@ class ApiService {
 
   //---login---Service---//
   Future<LoginModel?> login(String username, String password) async {
-    final url = "https://akpa.in/santhwanam/api/v1/auth/login";
+    const url = "https://akpa.in/santhwanam/api/v1/auth/login";
 
     try {
       final response = await _dio.post(
@@ -148,7 +148,7 @@ class ApiService {
   }
 
   Future<Config> getConfig() async {
-    final url = 'https://akpa.in/santhwanam/api/v1/config';
+    const url = 'https://akpa.in/santhwanam/api/v1/config';
 
     try {
       final response = await _dio.get(url);
@@ -160,7 +160,7 @@ class ApiService {
       }
     } catch (e) {
       log('Error fetching config: $e');
-      throw e;
+      rethrow;
     }
   }
 

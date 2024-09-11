@@ -1,9 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:akpa/model/confgmodel/config_model.dart';
 import 'package:akpa/model/usermodel/user_model.dart';
 import 'package:akpa/service/api_service.dart';
 import 'package:akpa/view/bottom_bar/bottom_bar.dart';
 import 'package:akpa/view/edit_profile/edit_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Import for DateFormat
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -25,11 +28,11 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   void initState() {
     super.initState();
-    _fetchUserProfile();
-    _setupBlinkingAnimation();
+    fetchUserProfile();
+    setupBlinkingAnimation();
   }
 
-  Future<void> _fetchUserProfile() async {
+  Future<void> fetchUserProfile() async {
     final profile = await apiService.getUserProfile('1129');
     final config = await apiService.getConfig();
     setState(() {
@@ -39,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     });
   }
 
-  void _setupBlinkingAnimation() {
+  void setupBlinkingAnimation() {
     animationController = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
@@ -84,11 +87,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => BottombarScreens(),
+                                    builder: (context) =>
+                                        const BottombarScreens(),
                                   ),
                                 );
                               },
-                              child: Text('Go to Home'))
+                              child: const Text('Go to Home'))
                         ],
                       ),
                     ),
@@ -160,12 +164,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                   ),
                 ),
                 if (userProfile!.balanceAmount < 0) ...[
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   FadeTransition(
                     opacity: opacityAnimation,
-                    child: Text(
+                    child: const Text(
                       'Recharge Now',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
@@ -290,7 +294,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EditProfilePage()),
+                    MaterialPageRoute(
+                        builder: (context) => const EditProfilePage()),
                   );
                 },
               ),
@@ -347,7 +352,9 @@ class _ProfileScreenState extends State<ProfileScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildProfileDetail('Date of Birth', userProfile!.dateOfBirth),
+        const SizedBox(height: 10),
+        buildProfileDetail(
+            'Date of Birth', formatDate(userProfile!.dateOfBirth)),
         buildProfileDetail('Username', userProfile!.username),
         buildProfileDetail('District Name', userProfile!.districtName),
         buildProfileDetail('UPI ID', userProfile!.upiId),
@@ -361,5 +368,16 @@ class _ProfileScreenState extends State<ProfileScreen>
         buildProfileImage(),
       ],
     );
+  }
+
+  String formatDate(String dateString) {
+    try {
+      final DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+      final DateFormat outputFormat = DateFormat('dd/MM/yyyy');
+      final DateTime dateTime = inputFormat.parse(dateString);
+      return outputFormat.format(dateTime);
+    } catch (e) {
+      return dateString;
+    }
   }
 }

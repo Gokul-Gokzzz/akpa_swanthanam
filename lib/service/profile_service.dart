@@ -4,7 +4,7 @@ import 'package:akpa/model/editprofile/edit_profile_model.dart';
 import 'package:dio/dio.dart';
 
 class ProfileService {
-  final Dio _dio = Dio();
+  final Dio dio = Dio();
 
   Future<EditProfilePicResponse> updateProfilePicture(File profileImage) async {
     String url = 'https://akpa.in/santhwanam/api/v1/user/edit_profile_pic';
@@ -17,7 +17,7 @@ class ProfileService {
       log('Sending request to $url');
       log('File path: ${profileImage.path}');
 
-      Response response = await _dio.post(url, data: formData);
+      Response response = await dio.post(url, data: formData);
 
       log('Response: ${response.statusCode} ${response.data}');
 
@@ -27,12 +27,10 @@ class ProfileService {
         log('Error: Failed to update profile picture, status code: ${response.statusCode}');
         throw Exception('Failed to update profile picture');
       }
-    } on DioError catch (dioError) {
-      // Log Dio-specific errors
+    } on DioException catch (dioError) {
       log('Dio error: ${dioError.response?.statusCode}, message: ${dioError.message}');
       rethrow;
     } catch (e) {
-      // General error logging
       log('General error: $e');
       rethrow;
     }
